@@ -91,6 +91,16 @@ router.post("/signup", upload.single("photo"), (req, res, next) => {
 });
 // });
 
+// router.post('/:id/edit', (req, res, next) => {
+//   User.findById(req.params._id, (error, place) => {
+//     if (error){
+//     next(error);
+//     } else {
+//       res.render('/update', { user});
+//     }
+//   })
+// })
+
 
 router.get("/confirm/:token", (req, res) => {
   User.findOneAndUpdate({token:req.params.token},{$set:{active: true}},{new: true})
