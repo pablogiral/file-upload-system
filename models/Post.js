@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const User = require("../models/User");
+// const User = require("../models/User");
 
 const postSchema = new Schema(
   {
@@ -8,8 +8,7 @@ const postSchema = new Schema(
       type: String      
     },
     creatorId: {
-      type: {type:Schema.Types.ObjectId,ref:`${User}`},
-      required: true
+      type: {type:Schema.Types.ObjectId, ref:"User"},
     },
     picName: {
       type: String,
@@ -17,7 +16,6 @@ const postSchema = new Schema(
     },
     picPath: {
       type: String,
-      required: true,
     },
   },
   {

@@ -11,19 +11,31 @@ router.get("/postcreate",check.checkActive ,(req, res, next) => {
   res.render("posts/postcreate",{user});
 });
 
-router.post('/add', upload.single('photo'), (req, res, next) => {
-  const { content, pickName } = req.body;
+router.post('/postcreate', upload.single('photo'), (req, res, next) => {
+  const { content, picName } = req.body;
   const { originalname, url } = req.file;
-  const newMovie = new Movie({
-    title,
-    description,
-    imgName: pickName,
-    imgPath: url,
+
+  console.log(content, picName, originalname, url,  req.user._id)
+  
+  const newPost = new Post({
+    content,
+    creatorId: req.user._id,
+    picName: picName,
+    picPath: url,
   });
-  newMovie.save()
+  console.log(newPost)
+  newPost.save()
     .then(() => res.redirect('/'))
     .catch(error => next(error));
 });
+
+router.get('/postcreate', (req, res, next) => {
+  Post.find()
+  .populate('creatorId')
+  .then((posts) => {
+    res.json(posts);
+  })
+} )
 
 
 
