@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 mongoose
-.connect('mongodb://localhost/file-upload-app-dev', {useNewUrlParser: true})
+.connect('mongodb://localhost/file-upload-app', {useNewUrlParser: true})
 .then(x => {
   console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
 })

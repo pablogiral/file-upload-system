@@ -14,8 +14,6 @@ router.get("/postcreate",check.checkActive ,(req, res, next) => {
 router.post('/postcreate', upload.single('photo'), (req, res, next) => {
   const { content, picName } = req.body;
   const { originalname, url } = req.file;
-
-  console.log(content, picName, originalname, url,  req.user._id)
   
   const newPost = new Post({
     content,
@@ -23,9 +21,8 @@ router.post('/postcreate', upload.single('photo'), (req, res, next) => {
     picName: picName,
     picPath: url,
   });
-  console.log(newPost)
   newPost.save()
-    .then(() => res.redirect('/'))
+    .then(() => res.redirect('/auth/privateprofile'))
     .catch(error => next(error));
 });
 
@@ -33,9 +30,11 @@ router.get('/postcreate', (req, res, next) => {
   Post.find()
   .populate('creatorId')
   .then((posts) => {
+    console.log(posts)
     res.json(posts);
   })
-} )
+});
+
 
 
 
